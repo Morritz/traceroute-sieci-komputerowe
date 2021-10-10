@@ -112,6 +112,9 @@ int main(int argc, char *argv[])
     	tv_out.tv_usec = 0;
 		setsockopt(icmp_endpoint, SOL_SOCKET, SO_RCVTIMEO, &tv_out, sizeof(tv_out));
 
+		struct in_addr paddr;
+		paddr.s_addr = destinationIP;
+		logg("Traceroute to (%s), max hops %d, bytes %d", inet_ntoa(paddr), maxHops, sizeof((struct ping_packet *)0)->payload);
         for(;;) {
 			if (TTL >= maxHops) exit(0);
 			struct ping_packet packet;
